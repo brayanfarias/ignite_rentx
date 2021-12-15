@@ -1,8 +1,122 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "RentalX Documentation",
+        "title": "Rentx Documentation",
         "description": "A rent api",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "contact": {
+            "email": "bpjfarias@gmail.com"
+        }
+    },
+    "paths": {
+        "/categories": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create a category",
+                "description": "Create a new repository",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Categories",
+                                "example": {
+                                    "name": "category name sample",
+                                    "description": "category description sample"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Category already exists"
+                    }
+                }
+            }
+        },
+        "/categories/import": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Upload a category",
+                "description": "Upload a new caregory",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/specifications": {
+            "post": {
+                "tags": [
+                    "Specification"
+                ],
+                "summary": "Create a specification",
+                "description": "Create a new specification",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Specifications"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Category already exists"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Specifications": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Categories": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        }
     }
 }

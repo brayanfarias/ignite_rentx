@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  service_database_rentx:
+    image: postgres
+    container_name: container_database_rentx
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user_db_rentx
+      - POSTGRES_PASSWORD=pw_db_rentx
+      - POSTGRES_DB=name_db_rentx
+    volumes:
+      - pgdata:/data/postgres
+    
+  service_app_rentx:
+    build: .
+    container_name: container_app_rentx
+    ports:
+      - 3333:3333
+    volumes:
+      - .:/usr/app
+    links: 
+      - service_database_rentx
+    depends_on:
+      - service_database_rentx
+
+volumes:
+  pgdata:
+    driver: local
