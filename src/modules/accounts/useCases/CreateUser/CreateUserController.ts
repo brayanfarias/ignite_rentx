@@ -1,8 +1,7 @@
+import ICreateUserDTO from "@modules/accounts/dtos/ICreateUserDTO";
+import CreateUserUseCase from "@modules/accounts/useCases/CreateUser/CreateUserUseCase";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
-import ICreateUserDTO from "../../dtos/ICreateUserDTO";
-import CreateUserUseCase from "./CreateUserUseCase";
 
 export default class CreateUserController {
   async handler(request: Request, response: Response): Promise<Response> {

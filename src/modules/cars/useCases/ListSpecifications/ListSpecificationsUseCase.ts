@@ -1,10 +1,9 @@
+import Specification from "@modules/cars/infra/typeorm/entities/Specification";
+import ISpecificationRepository from "@modules/cars/repositories/ISpecificationRepository";
 import { inject, injectable } from "tsyringe";
 
-import { Specification } from "../../entities/Specification";
-import { ISpecificationRepository } from "../../repositories/ISpecificationRepository";
-
 @injectable()
-class ListSpecificationsUseCase {
+export default class ListSpecificationsUseCase {
   private specificationRepository: ISpecificationRepository;
 
   constructor(
@@ -18,5 +17,3 @@ class ListSpecificationsUseCase {
     return this.specificationRepository.list();
   }
 }
-
-export { ListSpecificationsUseCase };

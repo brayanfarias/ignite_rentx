@@ -1,8 +1,7 @@
+import IRequestUpdateAvatar from "@modules/accounts/dtos/IRequestUpdateAvatar";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { deleteFile } from "@utils/file";
 import { inject, injectable } from "tsyringe";
-
-import { deleteFile } from "../../../../utils/file";
-import IRequestUpdateAvatar from "../../dtos/IRequestUpdateAvatar";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 @injectable()
 export default class UpdateUserAvatarUseCase {
