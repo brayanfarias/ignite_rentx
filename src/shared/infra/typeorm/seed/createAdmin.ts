@@ -14,6 +14,8 @@ async function createAdmin() {
     VALUES('${id}', 'admin', 'admin@admin.com.br', '${pw}', true, 'now()', '123456789')
         `
   );
+
+  await connection.close();
 }
 
 createAdmin().then(() => console.log("Admin created!"));
