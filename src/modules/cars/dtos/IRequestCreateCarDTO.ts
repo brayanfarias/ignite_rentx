@@ -9,4 +9,5 @@ export default interface IRequestCreateCarDTO {
   brand: string;
   category_id: string;
   specification?: Specification[];
+  id?: string;
 }

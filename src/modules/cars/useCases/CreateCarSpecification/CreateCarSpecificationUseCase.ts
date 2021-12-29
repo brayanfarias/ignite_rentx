@@ -2,14 +2,18 @@ import IRequestCreateCarSpecification from "@modules/cars/dtos/IRequestCreateCar
 import Car from "@modules/cars/infra/typeorm/entities/Car";
 import ICarRepository from "@modules/cars/repositories/ICarRepository";
 import ISpecificationRepository from "@modules/cars/repositories/ISpecificationRepository";
+import { inject, injectable } from "tsyringe";
 
 import AppError from "@shared/errors/AppError";
 
+@injectable()
 export default class CreateCarSpecificationUseCase {
   private carRepositoryImpl: ICarRepository;
   private specificationRepositoryImpl: ISpecificationRepository;
   constructor(
+    @inject("CarRepositoryImpl")
     carRepositoryImpl: ICarRepository,
+    @inject("SpecificationRepositoryImpl")
     specificationRepositoryImpl: ISpecificationRepository
   ) {
     this.carRepositoryImpl = carRepositoryImpl;

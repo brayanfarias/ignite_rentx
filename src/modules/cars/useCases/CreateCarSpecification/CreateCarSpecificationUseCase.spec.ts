@@ -20,6 +20,11 @@ describe("Create car's specifications", () => {
   });
 
   it("should be able to add a new specification to the car", async () => {
+    const specification = await specificationImplMemory.create({
+      name: "specification_name",
+      description: "specification description",
+    });
+
     const car = await carRepositoryImplMemory.create({
       name: "Car Test",
       description: "Description Test",
@@ -30,12 +35,15 @@ describe("Create car's specifications", () => {
       category_id: "1",
     });
 
-    const specifications_id = ["1", "2"];
+    const specifications_id = [specification.id];
 
-    await createCarSpecificationUseCase.execute({
+    const updated = await createCarSpecificationUseCase.execute({
       car_id: car.id,
       specifications_id,
     });
+
+    expect(updated).toHaveProperty("specifications");
+    expect(updated.specifications.length).toBe(1);
   });
 
   it("should be able to add a new specification to a non existent car", async () => {
@@ -47,6 +55,6 @@ describe("Create car's specifications", () => {
         car_id,
         specifications_id,
       });
-    }).rejects.toThrow(AppError);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

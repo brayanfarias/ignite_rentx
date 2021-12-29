@@ -12,6 +12,11 @@ export default class SpecificationRepositoryImpl
     this.repository = getRepository(Specification);
   }
 
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    const specifications = await this.repository.findByIds(ids);
+    return specifications;
+  }
+
   async list(): Promise<Specification[]> {
     return this.repository.find();
   }
