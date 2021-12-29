@@ -3,12 +3,16 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 
 import Category from "./Category";
+import Specification from "./Specification";
 
 @Entity("cars")
 export default class Car {
@@ -45,6 +49,14 @@ export default class Car {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @ManyToMany(() => Specification)
+  @JoinTable({
+    name: "specifications_cars",
+    joinColumn: { name: "car_id" },
+    inverseJoinColumn: { name: "specification_id" },
+  })
+  specification: Specification[];
 
   constructor() {
     if (!this.id) this.id = uuid();
