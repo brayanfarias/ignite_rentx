@@ -1,4 +1,4 @@
-import IRequestCreateCar from "@modules/cars/dtos/IRequestCreateCar";
+import IRequestCreateCarDTO from "@modules/cars/dtos/IRequestCreateCarDTO";
 import Car from "@modules/cars/infra/typeorm/entities/Car";
 import ICarRepository from "@modules/cars/repositories/ICarRepository";
 import { inject, injectable } from "tsyringe";
@@ -15,7 +15,7 @@ export default class CreateCarUseCase {
   ) {
     this.carRepositoryImpl = carRepositoryImpl;
   }
-  async execute(data: IRequestCreateCar): Promise<Car> {
+  async execute(data: IRequestCreateCarDTO): Promise<Car> {
     const exists = await this.carRepositoryImpl.findByLicensePlate(
       data.license_plate
     );

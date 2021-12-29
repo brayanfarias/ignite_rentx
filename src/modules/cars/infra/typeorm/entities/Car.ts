@@ -6,7 +6,6 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
@@ -56,7 +55,7 @@ export default class Car {
     joinColumn: { name: "car_id" },
     inverseJoinColumn: { name: "specification_id" },
   })
-  specification: Specification[];
+  specifications: Specification[];
 
   constructor() {
     if (!this.id) this.id = uuid();

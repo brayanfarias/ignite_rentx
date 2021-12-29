@@ -11,6 +11,10 @@ export default class CarRepositoryImpl implements ICarRepository {
   constructor() {
     this.carRepositoryImpl = getRepository(Car);
   }
+  async findById(id: string): Promise<Car> {
+    const car = this.carRepositoryImpl.findOne(id);
+    return car;
+  }
 
   async findAllAvailable(filter: IRequestListAvailableCarDTO): Promise<Car[]> {
     const query = this.carRepositoryImpl

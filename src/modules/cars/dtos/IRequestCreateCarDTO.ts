@@ -1,3 +1,5 @@
+import Specification from "../infra/typeorm/entities/Specification";
+
 export default interface IRequestCreateCarDTO {
   name: string;
   description: string;
@@ -6,4 +8,5 @@ export default interface IRequestCreateCarDTO {
   fine_amount: number;
   brand: string;
   category_id: string;
+  specification?: Specification[];
 }
