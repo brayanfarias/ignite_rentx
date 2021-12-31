@@ -21,5 +21,6 @@ export default class Rental {
 
   constructor() {
     if (!this.id) this.id = uuid();
+    this.start_date = new Date();
   }
 }
