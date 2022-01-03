@@ -1,16 +1,20 @@
 import ICreateRentalDTO from "@modules/rentals/dtos/ICreateRentalDTO";
 import Rental from "@modules/rentals/infra/typeorm/entities/Rental";
 import IRentalRepository from "@modules/rentals/repositories/IRentalRepository";
+import { inject, injectable } from "tsyringe";
 
 import IDateProvider from "@shared/container/providers/DateProvider/IDateProvider";
 import AppError from "@shared/errors/AppError";
 
+@injectable()
 export default class CreateRentalUseCase {
   private rentalRepository: IRentalRepository;
   private dateProvider: IDateProvider;
 
   constructor(
+    @inject("RentalRepositoryImpl")
     rentalRepository: IRentalRepository,
+    @inject("DayjsDateProviderImpl")
     dateProvider: IDateProvider
   ) {
     this.rentalRepository = rentalRepository;
