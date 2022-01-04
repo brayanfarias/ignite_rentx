@@ -1,11 +1,11 @@
+import IRequestAuthenticate from "@modules/accounts/dtos/IRequestAuthenticate";
+import IResponseAuthenticate from "@modules/accounts/dtos/IResponseAuthenticate";
+import IUsersRepository from "@modules/accounts/repositories/IUsersRepository";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
-import AppError from "../../../../errors/AppError";
-import IRequestAuthenticate from "../../dtos/IRequestAuthenticate";
-import IResponseAuthenticate from "../../dtos/IResponseAuthenticate";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import AppError from "@shared/errors/AppError";
 
 @injectable()
 export default class AuthenticateUserUseCase {

@@ -1,9 +1,8 @@
+import CreateCategoryUseCase from "@modules/cars/useCases/CreateCategory/CreateCategoryUseCase";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { CreateCategoryUseCase } from "../CreateCategory/CreateCategoryUseCase";
-
-class CreateSpecificationController {
+export default class CreateSpecificationController {
   async handler(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
 
@@ -12,5 +11,3 @@ class CreateSpecificationController {
     return response.status(201).send();
   }
 }
-
-export { CreateSpecificationController };

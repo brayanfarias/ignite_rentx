@@ -1,15 +1,11 @@
+import IRequestCreateCategory from "@modules/cars/dtos/IRequestCreateCategory";
+import ICategoryRepository from "@modules/cars/repositories/ICategoryRepository";
 import { inject, injectable } from "tsyringe";
 
-import AppError from "../../../../errors/AppError";
-import { ICategoryRepository } from "../../repositories/ICategoryRepository";
-
-interface IRequest {
-  name: string;
-  description: string;
-}
+import AppError from "@shared/errors/AppError";
 
 @injectable()
-class CreateCategoryUseCase {
+export default class CreateCategoryUseCase {
   private categoryRespository: ICategoryRepository;
 
   constructor(
@@ -19,7 +15,7 @@ class CreateCategoryUseCase {
     this.categoryRespository = categoryRespository;
   }
 
-  async execute({ name, description }: IRequest): Promise<void> {
+  async execute({ name, description }: IRequestCreateCategory): Promise<void> {
     const exists = await this.categoryRespository.findByName(name);
 
     if (exists) {
@@ -29,4 +25,3 @@ class CreateCategoryUseCase {
     }
   }
 }
-export { CreateCategoryUseCase };

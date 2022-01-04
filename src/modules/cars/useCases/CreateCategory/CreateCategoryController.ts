@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
+import CreateCategoryUseCase from "./CreateCategoryUseCase";
 
-class CreateCategoryController {
+export default class CreateCategoryController {
   async handler(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
 
@@ -13,5 +13,3 @@ class CreateCategoryController {
     return response.status(201).send();
   }
 }
-
-export { CreateCategoryController };
