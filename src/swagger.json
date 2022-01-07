@@ -16,6 +16,11 @@
                 ],
                 "summary": "Create a category",
                 "description": "Create a new repository",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -93,9 +98,46 @@
                     }
                 }
             }
+        },
+        "/sessions": {
+            "post": {
+                "tags": [
+                    "Sessions"
+                ],
+                "summary": "Authentication User",
+                "description": "Authentication User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Sessions"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "E-mail or password incorrect."
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "Sessions": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "Specifications": {
             "type": "object",
             "properties": {
@@ -117,6 +159,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
         }
     }
 }
