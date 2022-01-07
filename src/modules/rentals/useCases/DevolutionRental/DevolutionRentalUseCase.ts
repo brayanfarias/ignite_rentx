@@ -2,11 +2,12 @@ import ICarRepository from "@modules/cars/repositories/ICarRepository";
 import IDevolutionRentalDTO from "@modules/rentals/dtos/IDevolutionRentalDTO";
 import Rental from "@modules/rentals/infra/typeorm/entities/Rental";
 import IRentalRepository from "@modules/rentals/repositories/IRentalRepository";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 import IDateProvider from "@shared/container/providers/DateProvider/IDateProvider";
 import AppError from "@shared/errors/AppError";
 
+@injectable()
 export default class DevolutionRentalUseCase {
   private MINIMUM_DAILY: 1;
 

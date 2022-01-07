@@ -18,11 +18,15 @@ export default class RentalRepositoryImpl implements IRentalRepository {
   }
 
   async findOpenRenalByUser(user_id: string): Promise<Rental> {
-    const rental = await this.repository.findOne({ user_id });
+    const rental = await this.repository.findOne({
+      where: { user_id, end_date: null },
+    });
     return rental;
   }
   async findOpenRentaByCar(car_id: string): Promise<Rental> {
-    const rental = await this.repository.findOne({ car_id });
+    const rental = await this.repository.findOne({
+      where: { car_id, end_date: null },
+    });
     return rental;
   }
 
