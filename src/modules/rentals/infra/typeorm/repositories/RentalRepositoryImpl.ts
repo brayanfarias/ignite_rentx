@@ -11,6 +11,11 @@ export default class RentalRepositoryImpl implements IRentalRepository {
     this.repository = getRepository(Rental);
   }
 
+  async findAllByUser(user_id: string): Promise<Rental[]> {
+    const rentals = await this.repository.find({ user_id });
+    return rentals;
+  }
+
   async findById(id: string): Promise<Rental> {
     const rental = await this.repository.findOne(id);
 

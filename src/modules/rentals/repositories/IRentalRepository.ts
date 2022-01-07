@@ -6,4 +6,5 @@ export default interface IRentalRepository {
   findOpenRentaByCar(car_id: string): Promise<Rental>;
   create(dto: ICreateRentalDTO): Promise<Rental>;
   findById(id: string): Promise<Rental>;
+  findAllByUser(user_id: string): Promise<Rental[]>;
 }
