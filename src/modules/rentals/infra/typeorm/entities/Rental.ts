@@ -1,7 +1,10 @@
+import Car from "@modules/cars/infra/typeorm/entities/Car";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -29,6 +32,12 @@ export default class Rental {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(() => Car)
+  @JoinColumn({
+    name: "car_id",
+  })
+  car: Car;
 
   @Column()
   car_id: string;
