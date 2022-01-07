@@ -7,4 +7,5 @@ export default interface ICarRepository {
   findByLicensePlate(license_plate: string): Promise<Car>;
   findAllAvailable(filter: IRequestListAvailableCarDTO): Promise<Car[]>;
   findById(id: string): Promise<Car>;
+  updateAvailable(id: string, available: boolean): Promise<void>;
 }

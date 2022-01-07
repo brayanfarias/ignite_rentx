@@ -1,3 +1,4 @@
+import ICarRepository from "@modules/cars/repositories/ICarRepository";
 import ICreateRentalDTO from "@modules/rentals/dtos/ICreateRentalDTO";
 import Rental from "@modules/rentals/infra/typeorm/entities/Rental";
 import IRentalRepository from "@modules/rentals/repositories/IRentalRepository";
@@ -10,15 +11,19 @@ import AppError from "@shared/errors/AppError";
 export default class CreateRentalUseCase {
   private rentalRepository: IRentalRepository;
   private dateProvider: IDateProvider;
+  private carRepository: ICarRepository;
 
   constructor(
     @inject("RentalRepositoryImpl")
     rentalRepository: IRentalRepository,
     @inject("DayjsDateProviderImpl")
-    dateProvider: IDateProvider
+    dateProvider: IDateProvider,
+    @inject("CarRepositoryImpl")
+    carRepository: ICarRepository
   ) {
     this.rentalRepository = rentalRepository;
     this.dateProvider = dateProvider;
+    this.carRepository = carRepository;
   }
 
   async execute(dto: ICreateRentalDTO): Promise<Rental> {
@@ -49,6 +54,8 @@ export default class CreateRentalUseCase {
     }
 
     const rental = await this.rentalRepository.create(dto);
+
+    await this.carRepository.updateAvailable(dto.car_id, false);
     return rental;
   }
 }

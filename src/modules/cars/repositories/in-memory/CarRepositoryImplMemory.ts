@@ -7,6 +7,11 @@ import ICarRepository from "../ICarRepository";
 export default class CarRepositoryImplMemory implements ICarRepository {
   private cars: Car[] = [];
 
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    const car = this.cars.find((c) => c.id === id);
+
+    if (car) car.available = available;
+  }
   async findById(id: string): Promise<Car> {
     const car = this.cars.find((c) => c.id === id);
     return car;
